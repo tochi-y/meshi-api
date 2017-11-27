@@ -20,6 +20,23 @@ export default {
     }
   },
 
+  // POST /api/meshi
+  createMeshi: {
+    body: {
+      name: Joi.string().required(),
+    }
+  },
+
+  // UPDATE /api/meshi/:meshirId
+  updateMeshi: {
+    body: {
+      name: Joi.string().required(),
+    },
+    params: {
+      meshiId: Joi.string().hex().required()
+    }
+  },
+
   // POST /api/auth/login
   login: {
     body: {
