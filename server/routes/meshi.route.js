@@ -12,6 +12,10 @@ router.route('/')
   /** POST /api/meshi - Create new meshi */
   .post(validate(paramValidation.createMeshi), meshiCtrl.create);
 
+router.route('/random')
+  /** GET /api/meshi/random - Get meshi randomly */
+  .get(meshiCtrl.getRandomly);
+
 router.route('/:meshiId')
   /** GET /api/meshi/:meshiId - Get meshi */
   .get(meshiCtrl.get)

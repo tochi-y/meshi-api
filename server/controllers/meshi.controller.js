@@ -70,5 +70,14 @@ function remove(req, res, next) {
     .then(deletedMeshi => res.json(deletedMeshi))
     .catch(e => next(e));
 }
+/**
+ * Get meshi randomly
+ * @returns {Meshi}
+ */
+function getRandomly(req, res, next) {
+  Meshi.random()
+    .then(meshi => res.json(meshi))
+    .catch(e => next(e));
+}
 
-export default { load, get, create, update, list, remove };
+export default { load, get, create, update, list, remove, getRandomly };

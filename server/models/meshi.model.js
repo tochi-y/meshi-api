@@ -63,6 +63,22 @@ MeshiSchema.statics = {
       .skip(+skip)
       .limit(+limit)
       .exec();
+  },
+
+  /**
+   * Get meshi randomly
+   * @returns {Promise<Meshi, APIError>}
+   */
+  random() {
+    return this.aggregate({ $sample: { size: 1 } })
+      .exec()
+      .then((meshi) => {
+        if (meshi) {
+          return meshi;
+        }
+        const err = new APIError('No such meshi exists!', httpStatus.NOT_FOUND);
+        return Promise.reject(err);
+      });
   }
 };
 
