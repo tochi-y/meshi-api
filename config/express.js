@@ -13,6 +13,7 @@ import { CronJob } from 'cron';
 import winstonInstance from './winston';
 import routes from '../server/routes/index.route';
 import config from './config';
+import notify from './notification';
 import APIError from '../server/helpers/APIError';
 
 const app = express();
@@ -87,9 +88,7 @@ app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
 
 // notification scheduler, notify meshi by cron pattern schedule
 if (config.notification.schedule) {
-  new CronJob(config.notification.schedule, () => { // eslint-disable-line no-new
-    console.log('Notification is not implemented.');
-  }, null, true, config.timezone);
+  new CronJob(config.notification.schedule, notify('line'), null, true, config.timezone); // eslint-disable-line no-new
 }
 
 export default app;

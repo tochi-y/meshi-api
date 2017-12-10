@@ -40,6 +40,7 @@
     "API"
   ],
   "dependencies": {
+    "@line/bot-sdk": "^5.1.0",
     "babel-cli": "6.18.0",
     "babel-core": "6.18.0",
     "babel-plugin-add-module-exports": "0.2.1",

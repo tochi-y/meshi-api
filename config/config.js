@@ -42,6 +42,11 @@ const config = {
   notification: {
     schedule: envVars.NOTIFICATION_SCHEDULE
   },
+  line: {
+    channelAccessToken: envVars.LINE_CHANNEL_ACCESS_TOKEN,
+    channelSecret: envVars.LINE_CHANNEL_SECRET,
+    notificationToId: envVars.LINE_NOTIFICATION_TO_ID
+  },
   timezone: envVars.TZ
 };
 
