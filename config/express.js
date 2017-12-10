@@ -9,6 +9,7 @@ import httpStatus from 'http-status';
 import expressWinston from 'express-winston';
 import expressValidation from 'express-validation';
 import helmet from 'helmet';
+import { CronJob } from 'cron';
 import winstonInstance from './winston';
 import routes from '../server/routes/index.route';
 import config from './config';
@@ -83,5 +84,12 @@ app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
     stack: config.env === 'development' ? err.stack : {}
   })
 );
+
+// notification scheduler, notify meshi by cron pattern schedule
+if (config.notification.schedule) {
+  new CronJob(config.notification.schedule, () => { // eslint-disable-line no-new
+    console.log('Notification is not implemented.');
+  }, null, true, config.timezone);
+}
 
 export default app;

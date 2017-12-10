@@ -38,7 +38,11 @@ const config = {
   mongo: {
     host: envVars.MONGO_HOST,
     port: envVars.MONGO_PORT
-  }
+  },
+  notification: {
+    schedule: envVars.NOTIFICATION_SCHEDULE
+  },
+  timezone: envVars.TZ
 };
 
 export default config;
