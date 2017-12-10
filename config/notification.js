@@ -15,7 +15,7 @@ const notifyByLine = () => {
     .then(meshi => (
       linetClient.pushMessage(lineNotificationToId, {
         type: 'text',
-        text: `${meshi[0].name}がいいんじゃない？`
+        text: `${meshi.name}がいいんじゃない？`
       })
     ))
     .catch((err) => {

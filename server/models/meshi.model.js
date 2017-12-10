@@ -73,8 +73,8 @@ MeshiSchema.statics = {
     return this.aggregate({ $sample: { size: 1 } })
       .exec()
       .then((meshi) => {
-        if (meshi) {
-          return meshi;
+        if (meshi && meshi.length > 0) {
+          return meshi[0];
         }
         const err = new APIError('No such meshi exists!', httpStatus.NOT_FOUND);
         return Promise.reject(err);
