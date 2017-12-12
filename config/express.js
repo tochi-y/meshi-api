@@ -11,6 +11,7 @@ import expressValidation from 'express-validation';
 import helmet from 'helmet';
 import { CronJob } from 'cron';
 import winstonInstance from './winston';
+import lineWebhook from './line-webhook';
 import routes from '../server/routes/index.route';
 import config from './config';
 import notify from './notification';
@@ -21,6 +22,9 @@ const app = express();
 if (config.env === 'development') {
   app.use(logger('dev'));
 }
+
+// set line bot webhook
+app.use('/line/webhook', lineWebhook);
 
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
@@ -50,6 +54,11 @@ if (config.env === 'development') {
 
 // mount all routes on /api path
 app.use('/api', routes);
+
+// notification scheduler, notify meshi by cron pattern schedule
+if (config.notification.schedule) {
+  new CronJob(config.notification.schedule, notify('line'), null, true, config.timezone); // eslint-disable-line no-new
+}
 
 // if error is not an instanceOf APIError, convert it.
 app.use((err, req, res, next) => {
@@ -85,10 +94,5 @@ app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
     stack: config.env === 'development' ? err.stack : {}
   })
 );
-
-// notification scheduler, notify meshi by cron pattern schedule
-if (config.notification.schedule) {
-  new CronJob(config.notification.schedule, notify('line'), null, true, config.timezone); // eslint-disable-line no-new
-}
 
 export default app;
