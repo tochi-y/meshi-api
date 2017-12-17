@@ -1,6 +1,7 @@
 import express from 'express';
 import * as line from '@line/bot-sdk';
 import config from './config';
+import Meshi from '../server/models/meshi.model';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -12,13 +13,22 @@ const lineConfig = {
 const linetClient = new line.Client(lineConfig);
 
 function handleEvent(event) {
+  console.log(JSON.stringify(event, null, 2));
   if (event.type !== 'message' || event.message.type !== 'text') {
     return Promise.resolve(null);
   }
-  return linetClient.replyMessage(event.replyToken, {
-    type: 'text',
-    text: event.message.text
-  });
+  const { text } = event.message;
+  if (text.includes('飯') || text.includes('めし')) {
+    return Meshi
+      .random()
+      .then(meshi => (
+        linetClient.replyMessage(event.replyToken, {
+          type: 'text',
+          text: `${meshi.name}がいいんじゃない？`
+        })
+      ));
+  }
+  return null;
 }
 
 // mount line webhook route on /line/webhook
