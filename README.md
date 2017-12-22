@@ -2,7 +2,8 @@
 
 ## Overview
 
-Under development.
+Under development. 
+開発中です。
 
 ### Features
 
@@ -10,7 +11,7 @@ Under development.
 
 Clone the repo:
 ```sh
-git clone git@github.com:****/****.git
+git clone git@github.com:tochi-y/meshi-api.git
 cd meshi
 ```
 
@@ -124,10 +125,10 @@ Get code coverage summary on executing `yarn test`
 Contributions, questions and comments are all welcome and encouraged. For code contributions submit a pull request with unit test.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/****/meshi-api/blob/master/LICENSE)
+This project is licensed under the [MIT License](https://github.com/tochi-y/meshi-api/blob/master/LICENSE)
 
 ## Based on
-This project is based on [express-mongoose-es6-rest-api](https://github.com/KunalKapadia/express-mongoose-es6-rest-api)
+This project is based on [express-mongoose-es6-rest-api](https://github.com/KunalKapadia/express-mongoose-es6-rest-api).
 I appreciate for the project.
 
 ## Meta
